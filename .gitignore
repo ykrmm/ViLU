@@ -132,8 +132,10 @@ outputs/
 wandb/
 multirun/
 *.out 
-lscale_uq/multirun
+lumen/multirun
 *.egg-info/
 lumen.egg-info/
 lumen.egg-info/*
 *lumen.egg-info/*
+
+data/
