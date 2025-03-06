@@ -1,0 +1,24 @@
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lscaleuq/run.py \
+ exp_name="best_uqvlm" \
+ dataset=cc3m_emb \
+ backbone=clip_vit_b32 \
+ zs_datasets=data_suite+imgnet \
+ model=confidnetvlm_attention \
+ model.keep_frozen=true \
+ model.n_iter_freeze_proj=1000 \
+ model.use_predicted_caption=true \
+ engine.n_epochs=400 \
+ engine.batchwise_train=true \
+ engine.eval_zs=true \
+ engine.eval_only=false \
+ engine.eval_freq=1 \
+ engine.eval_zs_freq=20 \
+ engine.use_gather=false \
+ resume=False \
+ loss.weighting_type='adaptative' \
+ optimizer.lr=0.001 \
+ batch_size=1024 \
+ batch_size_val=1024 \
+ cluster_env=cnam \
+ wandb_mode=online \
+ debug=false

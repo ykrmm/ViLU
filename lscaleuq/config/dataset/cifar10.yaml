@@ -1,0 +1,17 @@
+name: CIFAR10
+path: /local/DEEPLEARNING/LargeScaleUQ/CIFAR-10
+features_dataset: false
+web_dataset: false
+caption_dataset: false
+
+train: 
+  _target_: lscaleuq.dataset_uq.CIFAR10Dataset
+  root: ${dataset.path}
+  train: True
+  transform: ${transform.train}
+
+val:
+  _target_: lscaleuq.dataset_uq.CIFAR10Dataset
+  root: ${dataset.path}
+  train: False
+  transform: ${transform.val}

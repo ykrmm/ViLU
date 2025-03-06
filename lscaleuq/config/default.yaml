@@ -1,0 +1,70 @@
+exp_name: ???
+resume: true
+batch_size: 1024
+batch_size_val: 1024
+workers: 16
+seed: 42
+debug: False
+shuffle_val: false
+wandb_mode: online
+wandb_run_id: null
+save_dir: ${join:${cluster_env.path},Weights}
+
+loader_wds:
+    _target_: torch.utils.data.DataLoader
+    batch_size: null
+    num_workers: ${workers}
+    persistent_workers: false
+    pin_memory: true
+    drop_last: null
+
+train_loader:
+    _target_: torch.utils.data.DataLoader
+    batch_size: ${batch_size}
+    num_workers: ${workers}
+    persistent_workers: false
+    shuffle: true
+    pin_memory: true
+    drop_last: true
+
+val_loader:
+    _target_: torch.utils.data.DataLoader
+    batch_size: ${batch_size_val}
+    shuffle: ${shuffle_val}
+    num_workers: ${workers}
+    pin_memory: True
+    drop_last: false
+
+
+defaults:
+    - _self_
+
+    - dataset: cifar10
+
+    - zs_datasets: data_suite
+
+    - engine: trainer
+
+    - transform: clip_transform
+
+    - backbone: clip_vit_b32
+    
+    - model: confidnetvlm_attention
+
+    - optimizer: sgd
+
+    - lr_scheduler: cosine_annealing
+
+    - lr_warmup: linear_warmup
+
+    - loss: bce
+
+    - wandbconf: wandb_default
+
+    - fabric: ddp
+
+    - cluster_env: cnam
+    
+    - override hydra/job_logging: colorlog
+
+    - override hydra/hydra_logging: colorlog

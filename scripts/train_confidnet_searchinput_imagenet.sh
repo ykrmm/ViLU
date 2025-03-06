@@ -1,0 +1,21 @@
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lscaleuq/run.py \
+ exp_name="pred_t_only" \
+ dataset=imagenetemb \
+ backbone=clip_vit_b32 \
+ zs_datasets=data_suite \
+ model=confidnetvlm_attention \
+ model.keep_frozen=true \
+ model.n_iter_freeze_proj=1000 \
+ model.use_predicted_caption=true \
+ model.use_attention=false \
+ engine.n_epochs=125 \
+ engine.batchwise_train=false \
+ engine.eval_zs=false \
+ engine.eval_only=false \
+ resume=False \
+ loss.weight=1.5 \
+ optimizer.lr=0.001 \
+ batch_size=512 \
+ cluster_env=cnam \
+ wandb_mode=online \
+ debug=false \

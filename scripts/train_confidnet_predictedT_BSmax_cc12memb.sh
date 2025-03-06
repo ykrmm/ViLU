@@ -1,0 +1,40 @@
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lscaleuq/run.py \
+ exp_name="predicted_text_BS16384_deeper" \
+ dataset=cc12m_emb \
+ backbone=clip_vit_b32 \
+ zs_datasets=data_suite+imgnet \
+ model=confidnetvlm_attention \
+ model.keep_frozen=true \
+ model.n_iter_freeze_proj=1000 \
+ model.use_predicted_caption=true \
+ model.layers=[1024,1024,1024,512,128,1] \
+ engine.n_epochs=1200 \
+ engine.batchwise_train=true \
+ engine.eval_zs=true \
+ engine.eval_only=false \
+ resume=False \
+ loss.weight=1 \
+ optimizer.lr=0.05 \
+ batch_size=16384 \
+ cluster_env=cnam \
+ wandb_mode=online
+
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lscaleuq/run.py \
+ exp_name="predicted_text_BS16384" \
+ dataset=cc12m_emb \
+ backbone=clip_vit_b32 \
+ zs_datasets=data_suite+imgnet \
+ model=confidnetvlm_attention \
+ model.keep_frozen=true \
+ model.n_iter_freeze_proj=1000 \
+ model.use_predicted_caption=true \
+ engine.n_epochs=1200 \
+ engine.batchwise_train=true \
+ engine.eval_zs=true \
+ engine.eval_only=false \
+ resume=False \
+ loss.weight=1 \
+ optimizer.lr=0.05 \
+ batch_size=16384 \
+ cluster_env=cnam \
+ wandb_mode=online

@@ -1,0 +1,22 @@
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lscaleuq/run.py \
+ exp_name="confidnet_laion_adaptative" \
+ dataset=laion_emb \
+ backbone=clip_vit_b32 \
+ zs_datasets=data_suite+imgnet \
+ model=confidnetvlm_attention \
+ model.keep_frozen=true \
+ model.n_iter_freeze_proj=200 \
+ model.use_predicted_caption=true \
+ engine.n_epochs=40 \
+ engine.batchwise_train=true \
+ engine.eval_zs=true \
+ engine.eval_only=true \
+ resume=true \
+ save_dir='/share/DEEPLEARNING/datasets/LargeScaleUQ/Weights' \
+ loss.weight=1 \
+ loss.weighting_type='adaptative' \
+ optimizer.lr=0.016 \
+ batch_size=1024 \
+ batch_size_val=1024 \
+ cluster_env=cnam \
+ wandb_mode=disabled \

@@ -1,0 +1,4 @@
+name: "ViT-B/16"
+vision_dim: 512
+textual_dim: 512
+logit_scale: null

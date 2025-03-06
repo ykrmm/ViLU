@@ -1,0 +1,4 @@
+name: generate_emb
+batch_size: 128
+workers: 8
+save_visual_features: ${join:${cluster_env.path},ImageNet_VisualFeatures}

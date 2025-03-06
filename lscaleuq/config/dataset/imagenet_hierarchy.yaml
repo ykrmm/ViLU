@@ -1,0 +1,20 @@
+name: ImageNetHierachy
+path: ${join:${cluster_env.path},ImageNet}
+features_dataset: false
+web_dataset: false
+caption_dataset: false
+hierarchical_level: 1
+
+train: 
+  _target_: lscaleuq.dataset_uq.ImageNetSimpleHierarchyDataset
+  root: ${dataset.path}
+  split: train
+  transform: ${transform.train}
+  hierarchical_level: ${dataset.hierarchical_level}
+
+val:
+  _target_: lscaleuq.dataset_uq.ImageNetSimpleHierarchyDataset
+  root: ${dataset.path}
+  split: val
+  transform: ${transform.val}
+  hierarchical_level: ${dataset.hierarchical_level}

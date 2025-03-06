@@ -1,0 +1,5 @@
+_target_: wandb.integration.lightning.fabric.WandbLogger
+entity: nueve
+project: Large_scale_UQ
+mode: ${wandb_mode}
+reinit: True

@@ -1,0 +1,38 @@
+name: PetsFoodFlowers
+path: ${cluster_env.path}
+features_dataset: false
+web_dataset: false
+caption_dataset: false
+
+train: 
+  _target_: torch.utils.data.ConcatDataset
+  datasets:
+    - _target_: lscaleuq.dataset_uq.Flowers102Dataset
+      root: ${join:${zs_datasets.root},dataset_suite,flowers102}
+      split: train
+      transform: ${transform.train}
+    - _target_: lscaleuq.dataset_uq.Food101Dataset
+      root: ${join:${zs_datasets.root},dataset_suite,food-101}
+      split: train
+      transform: ${transform.train}
+    - _target_: lscaleuq.dataset_uq.OxfordPetsDataset
+      root: ${join:${zs_datasets.root}, dataset_suite,oxford-iiit-pet}
+      split: train
+      transform: ${transform.train}
+
+val:
+  _target_: torch.utils.data.ConcatDataset
+  datasets:
+    - _target_: lscaleuq.dataset_uq.Flowers102Dataset
+      root: ${join:${zs_datasets.root},dataset_suite,flowers102}
+      split: test
+      transform: ${transform.val}
+    - _target_: lscaleuq.dataset_uq.Food101Dataset
+      root: ${join:${zs_datasets.root},dataset_suite,food-101}
+      split: test
+      transform: ${transform.val}
+    - _target_: lscaleuq.dataset_uq.OxfordPetsDataset
+      root: ${join:${zs_datasets.root}, dataset_suite,oxford-iiit-pet}
+      split: test
+      transform: ${transform.val}
+

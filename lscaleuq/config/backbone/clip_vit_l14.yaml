@@ -1,0 +1,4 @@
+name: "ViT-L/14"
+vision_dim: 768
+textual_dim: 768
+logit_scale: null

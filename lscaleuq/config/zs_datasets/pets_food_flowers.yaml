@@ -1,0 +1,20 @@
+root: ${cluster_env.path}
+  
+dst:
+  Flowers:
+    _target_: lscaleuq.dataset_uq.Flowers102Dataset
+    root: ${join:${zs_datasets.root},dataset_suite,flowers102}
+    split: test
+    transform: ${transform.val}
+
+  Food:
+    _target_: lscaleuq.dataset_uq.Food101Dataset
+    root: ${join:${zs_datasets.root},dataset_suite,food-101}
+    split: test
+    transform: ${transform.val}
+
+  Pets:
+    _target_: lscaleuq.dataset_uq.OxfordPetsDataset
+    root: ${join:${zs_datasets.root}, dataset_suite,oxford-iiit-pet}
+    split: test
+    transform: ${transform.val}

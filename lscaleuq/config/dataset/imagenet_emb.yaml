@@ -1,0 +1,17 @@
+name: imagenet_emb
+path: /local/DEEPLEARNING/LargeScaleUQ/ImageNetEmb
+features_dataset: true
+web_dataset: false
+caption_dataset: false
+
+train: 
+  _target_: lscaleuq.dataset_uq.ImageNetEmbDataset
+  root: ${dataset.path}
+  clip_backbone: ${backbone.name}
+  split: train
+
+val:
+  _target_: lscaleuq.dataset_uq.ImageNetEmbDataset
+  root: ${dataset.path}
+  clip_backbone: ${backbone.name}
+  split: val

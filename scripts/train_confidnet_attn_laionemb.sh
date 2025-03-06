@@ -1,0 +1,26 @@
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lscaleuq/run.py \
+ exp_name="confidnet_best_laion" \
+ dataset=laion_emb \
+ backbone=clip_vit_b32 \
+ zs_datasets=data_suite+imgnet \
+ model=confidnetvlm_attention \
+ model.keep_frozen=false \
+ model.n_iter_freeze_proj=100000 \
+ model.use_predicted_caption=true \
+ engine.n_epochs=40 \
+ engine.batchwise_train=true \
+ engine.eval_zs=false \
+ engine.eval_only=true \
+ engine.eval_freq=1 \
+ engine.eval_zs_freq=1 \
+ engine.use_gather=false \
+ engine.max_iter_epoch=20000 \
+ engine.display_progress=true \
+ engine.print_freq=1000 \
+ resume=False \
+ loss.weight=1.5 \
+ optimizer.lr=0.005 \
+ batch_size=1024 \
+ cluster_env=cnam \
+ wandb_mode=online \
+ debug=false
