@@ -1,5 +1,7 @@
 # LuMen
-This is the official Pytorch implementation of our ICCV2025 submission ID:10053. The code is available for review only, do not share.
+This is the official Pytorch implementation of our ICCV2025 submission *10053*. 
+
+**The code is available for review only, do not share.**
 
 ![alt text](visu/figure_model.png)
 
