@@ -1,9 +1,10 @@
-# LuMen
+# LuMen: Learning Multi-modal Uncertainty in Vision-Language Models trough Failure Prediction
 This is the official Pytorch implementation of our ICCV2025 submission *10053*. 
 
 **The code is available for review only, do not share.**
 
-![alt text](visu/figure_model.png)
+<img src="visu/figure_model.png" alt="Description" width="800">
+
 
 
 ## Installation
@@ -62,4 +63,4 @@ The main code for viewing the training loops is located in `lumen/engine/trainer
 ## Notebook for reproductibility and visualisations
 In the `notebooks` folder you can find the scripts for loading and evaluating the pre-trained LuMen models on each dataset, as well as the code for visualising the failure curves. 
 
-![alt text](visu/quali_failure1.png)
+<img src="visu/quali_failure1.png" alt="Description" width="500">
