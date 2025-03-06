@@ -50,3 +50,16 @@ data/
 |––––––––train/
 |––––––––val/
 ```
+
+## Training 
+We provide training scripts in the `scripts` folder. For instance, to launch the training of LuMen on CIFAR-10 with the ViT-B/32 backbone with 400 epochs do:
+```
+sh scripts/train_lumen_cifar10.sh
+```
+Note that you may adapt the values of `CUDA_VISIBLE_DEVICES`. Training on an RTX A6000 GPU takes around 2 hours.
+The main code for viewing the training loops is located in `lumen/engine/trainer.py`
+
+## Notebook for reproductibility and visualisations
+In the `notebooks` folder you can find the scripts for loading and evaluating the pre-trained LuMen models on each dataset, as well as the code for visualising the failure curves. 
+
+![alt text](visu/quali_failure1.png)
