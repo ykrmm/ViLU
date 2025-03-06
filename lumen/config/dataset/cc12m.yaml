@@ -1,5 +1,5 @@
 name: CC12M
-path: /data/cc12m
+path: data/CC12M
 web_dataset: true
 caption_dataset: true
 

@@ -33,7 +33,7 @@ class BCELoss(nn.Module):
 
         if self.weighting_type == "adaptative":
             acc = correct.float().mean()
-            weights[~correct] *= acc / (1 - acc)
+            weights[~correct] *= torch.log(1 + (acc / (1 - acc)))
         else:
             weights[~correct] *= self.weight
 

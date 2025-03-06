@@ -1,6 +1,5 @@
 name: ImageNet
-path: /local/DEEPLEARNING/LargeScaleUQ/ImageNet
-features_dataset: false
+path: data/ImageNet
 web_dataset: false
 caption_dataset: false
 

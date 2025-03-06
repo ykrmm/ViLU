@@ -157,9 +157,7 @@ class Trainer:
                 if i % self.print_freq == 0 and self.display_progress:
                     progress.display(i)
 
-            if (self.n_iter >= self.max_iter_epoch) and (self.max_iter_epoch > 0):
-                self.n_iter = 0
-                break
+
 
         self.lr_scheduler.step()
 
@@ -187,8 +185,6 @@ class Trainer:
         confidence_success = []
         confidence_failure = []
         missclassifieds = []
-        tcps_success = []
-        tcps_failure = []
         mcps_success = []
         mcps_failure = []
         shannon_success = []
@@ -230,13 +226,13 @@ class Trainer:
                 labels = self.fabric.all_gather(labels).reshape(-1)
                 probs = self.fabric.all_gather(probs).reshape(-1, probs.shape[-1])
                 missclassified = labels != probs.argmax(dim=-1)
-
-            tcps = probs[torch.arange(labels.size(0)), labels]
+            
             mcps = probs.max(dim=-1).values
-            entropy = - (-torch.sum(probs * torch.log(probs + 1e-6), dim=-1))  # less entropy, more uncertain
-            entropy /= torch.log(torch.tensor(probs.size(-1)) + 1e-6)
-            doctor_uq = torch.sum(torch.tensor(probs)**2, dim=-1)
-            doctor_uq = - (1-doctor_uq)/doctor_uq
+            with self.fabric.autocast():
+                entropy = - (-torch.sum(probs * torch.log(probs + 1e-6), dim=-1))  # less entropy, more uncertain
+                entropy /= torch.log(torch.tensor(probs.size(-1)) + 1e-6)
+                doctor_uq = torch.sum(torch.tensor(probs)**2, dim=-1)
+                doctor_uq = - (1-doctor_uq)/doctor_uq
             confidence_success.append(confid_scores[~missclassified])
             confidence_failure.append(confid_scores[missclassified])
             missclassifieds.append(missclassified)
@@ -244,8 +240,6 @@ class Trainer:
             shannon_failure.append(entropy[missclassified])
             doctor_success.append(doctor_uq[~missclassified])
             doctor_failure.append(doctor_uq[missclassified])
-            tcps_success.append(tcps[~missclassified])
-            tcps_failure.append(tcps[missclassified])
             mcps_success.append(mcps[~missclassified])
             mcps_failure.append(mcps[missclassified])
 
@@ -256,32 +250,26 @@ class Trainer:
         shannon_failure = torch.concatenate(shannon_failure).cpu().numpy()
         doctor_success = torch.concatenate(doctor_success).cpu().numpy()
         doctor_failure = torch.concatenate(doctor_failure).cpu().numpy()
-        tcps_success = torch.cat(tcps_success).float().cpu().numpy()
-        tcps_failure = torch.cat(tcps_failure).float().cpu().numpy()
         mcps_success = torch.cat(mcps_success).float().cpu().numpy()
         mcps_failure = torch.cat(mcps_failure).float().cpu().numpy()
 
         # clip_acc = 1- missclassifieds.sum()/len(missclassifieds)
 
-        metrics["fpr"] = lib.get_fpr(confidence_success, confidence_failure)
-        metrics["auc"] = lib.get_auroc(confidence_success, confidence_failure)
-        metrics["aupr_err"] = lib.get_aupr_out(-confidence_success, -confidence_failure)
-
-        metrics["fpr_tcp"] = lib.get_fpr(tcps_success, tcps_failure)
-        metrics["auc_tcp"] = lib.get_auroc(tcps_success, tcps_failure)
-        metrics["aupr_err_tcp"] = lib.get_aupr_out(-tcps_success, -tcps_failure)
+        metrics["fpr_lumen"] = lib.get_fpr(confidence_success, confidence_failure)
+        metrics["auc_lumen"] = lib.get_auroc(confidence_success, confidence_failure)
+        metrics["aupr_err_lumen"] = lib.get_aupr_out(-confidence_success, -confidence_failure)
 
         metrics["fpr_mcp"] = lib.get_fpr(mcps_success, mcps_failure)
         metrics["auc_mcp"] = lib.get_auroc(mcps_success, mcps_failure)
         metrics["aupr_err_mcp"] = lib.get_aupr_out(-mcps_success, -mcps_failure)
-        
+        # Shannon entropy
         metrics["fpr_shannon"] = lib.get_fpr(shannon_success, shannon_failure)
         metrics["auc_shannon"] = lib.get_auroc(shannon_success, shannon_failure)
         metrics["aupr_err_shannon"] = lib.get_aupr_out(-shannon_success, -shannon_failure)
         
         metrics["fpr_doctor"] = lib.get_fpr(doctor_success, doctor_failure)
         metrics["auc_doctor"] = lib.get_auroc(doctor_success, doctor_failure)
-        metrics["aupr_doctor"] = lib.get_aupr_out(-doctor_success, -doctor_failure)
+        metrics["aupr_err_doctor"] = lib.get_aupr_out(-doctor_success, -doctor_failure)
 
         self.model.train(mode)
         return metrics
@@ -299,7 +287,7 @@ class Trainer:
                 self.fabric.info(f" * train_{metric} = {value:.3f}")
 
     def log_metrics_eval(self, val_meter: lib.DictAverage, epoch: int) -> None:
-        for m in ["    ", "_tcp", "_mcp"]:
+        for m in ["_lumen","_doctor","_shannon","_mcp"]:
             self.fabric.info(f" * auc{m} = {val_meter[f'auc{m.strip()}']:.3f}, fpr{m} = {val_meter[f'fpr{m.strip()}']:.3f}, aupr_err{m} = {val_meter[f'aupr_err{m.strip()}']:.3f}")
 
     def save_ckpt(

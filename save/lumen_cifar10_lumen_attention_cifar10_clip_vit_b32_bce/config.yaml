@@ -1,0 +1,151 @@
+exp_name: lumen_cifar10
+resume: false
+batch_size: 128
+batch_size_val: 1024
+workers: 16
+seed: 42
+debug: false
+shuffle_val: false
+save_dir: save
+loader_wds:
+  _target_: torch.utils.data.DataLoader
+  batch_size: null
+  num_workers: ${workers}
+  persistent_workers: false
+  pin_memory: true
+  drop_last: null
+train_loader:
+  _target_: torch.utils.data.DataLoader
+  batch_size: ${batch_size}
+  num_workers: ${workers}
+  persistent_workers: false
+  shuffle: true
+  pin_memory: true
+  drop_last: true
+val_loader:
+  _target_: torch.utils.data.DataLoader
+  batch_size: ${batch_size_val}
+  shuffle: ${shuffle_val}
+  num_workers: ${workers}
+  pin_memory: true
+  drop_last: false
+dataset:
+  name: CIFAR10
+  path: data/CIFAR-10
+  web_dataset: false
+  caption_dataset: false
+  train:
+    _target_: lumen.dataset_uq.CIFAR10Dataset
+    root: ${dataset.path}
+    train: true
+    transform: ${transform.train}
+  val:
+    _target_: lumen.dataset_uq.CIFAR10Dataset
+    root: ${dataset.path}
+    train: false
+    transform: ${transform.val}
+engine:
+  _target_: lumen.engine.trainer.Trainer
+  n_epochs: 800
+  print_freq: 200
+  max_iter_epoch: -1
+  use_gather: false
+  eval_freq: 5
+  save_freq: 5
+  eval_only: true
+  template_type: base
+  web_dataset: ${dataset.web_dataset}
+  caption_dataset: ${dataset.caption_dataset}
+  resume: ${resume}
+  batchwise_train: false
+  display_progress: false
+transform:
+  train:
+    _target_: torchvision.transforms.Compose
+    transforms:
+    - _target_: torchvision.transforms.RandomResizedCrop
+      size: 224
+      scale:
+      - 0.08
+      - 1.0
+      interpolation: 3
+    - _target_: lumen.dataset_uq.utils.ConvertImageToRGB
+    - _target_: torchvision.transforms.RandomHorizontalFlip
+    - _target_: torchvision.transforms.ToTensor
+    - _target_: torchvision.transforms.Normalize
+      mean:
+      - 0.48145466
+      - 0.4578275
+      - 0.40821073
+      std:
+      - 0.26862954
+      - 0.26130258
+      - 0.27577711
+  val:
+    _target_: torchvision.transforms.Compose
+    transforms:
+    - _target_: torchvision.transforms.Resize
+      size: 224
+      interpolation: 3
+    - _target_: torchvision.transforms.CenterCrop
+      size: 224
+    - _target_: lumen.dataset_uq.utils.ConvertImageToRGB
+    - _target_: torchvision.transforms.ToTensor
+    - _target_: torchvision.transforms.Normalize
+      mean:
+      - 0.48145466
+      - 0.4578275
+      - 0.40821073
+      std:
+      - 0.26862954
+      - 0.26130258
+      - 0.27577711
+backbone:
+  name: ViT-B/32
+  vision_dim: 512
+  textual_dim: 512
+  logit_scale: null
+model:
+  _target_: lumen.models.LuMenAttention
+  visual_dim: ${backbone.vision_dim}
+  textual_dim: ${backbone.vision_dim}
+  layers:
+  - 512
+  - 256
+  - 128
+  - 1
+  activation: relu
+  negative_slope: 0.01
+  use_sigmoid: ${if:${eq:${loss._target_},lumen.losses.MSELoss},True,False}
+  concat: true
+  identity_init: true
+  n_iter_freeze_proj: 1000
+  keep_frozen: false
+  use_predicted_caption: true
+  use_attention: true
+optimizer:
+  _target_: torch.optim.SGD
+  lr: 0.01
+  weight_decay: 0.0005
+  momentum: 0.9
+lr_scheduler:
+  _target_: torch.optim.lr_scheduler.CosineAnnealingLR
+  T_max: ${engine.n_epochs}
+lr_warmup:
+  _target_: torch.optim.lr_scheduler.LinearLR
+  start_factor: 0.1
+  end_factor: 1.0
+  total_iters: 5
+loss:
+  _target_: lumen.losses.BCELoss
+  weight: 1.0
+  weighting_type: adaptative
+  reduction: mean
+  batchwise_train: ${engine.batchwise_train}
+fabric:
+  _target_: lumen.lib.LightningFabric
+  accelerator: gpu
+  precision: bf16-mixed
+  strategy:
+    _target_: lightning.fabric.strategies.DDPStrategy
+    find_unused_parameters: false

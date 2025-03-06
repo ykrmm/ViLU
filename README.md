@@ -18,7 +18,7 @@ pip install -e .
 
 ```
 data/
-|––––Imagenet/
+|––––ImageNet/
 |––––––––ILSVRC2012_devkit_t12.tar.gz
 |––––––––train/
 |––––––––val/

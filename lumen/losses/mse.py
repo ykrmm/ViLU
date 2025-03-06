@@ -13,6 +13,7 @@ class MSELoss(nn.Module):
         reduction: str = "mean",
         use_entropy: bool = False,
         entropy_coef: float = 0.1,
+        batchwise_train: bool = False,
     ) -> torch.Tensor:
         super().__init__()
         self.weight = weight
@@ -20,6 +21,7 @@ class MSELoss(nn.Module):
         self.reduction = reduction
         self.use_entropy = use_entropy
         self.entropy_coef = entropy_coef
+        self.batchwise_train = batchwise_train
 
     def forward(
         self,
@@ -28,10 +30,14 @@ class MSELoss(nn.Module):
         labels: Tensor,
     ) -> Tensor:
         weights = torch.ones_like(probs[:, 0])
-        correct = labels == probs.argmax(dim=-1)
+        if self.batchwise_train:
+            correct = probs.diag() == probs.max(dim=-1).values
+        else:
+            correct = labels == probs.argmax(dim=-1)
 
         if self.weighting_type == "adaptative":
-            weights[~correct] *= (1 + torch.exp(4 * (correct.mean() - 0.5))) / 2
+            acc = correct.float().mean()
+            weights[~correct] *= torch.log(1 + (acc / (1 - acc)))
         else:
             weights[~correct] *= self.weight
 

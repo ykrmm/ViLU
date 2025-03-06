@@ -1,5 +1,5 @@
 name: CIFAR10
-path: /local/DEEPLEARNING/LargeScaleUQ/CIFAR-10
+path: data/CIFAR-10
 web_dataset: false
 caption_dataset: false
 
