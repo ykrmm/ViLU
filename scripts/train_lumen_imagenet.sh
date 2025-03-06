@@ -2,7 +2,7 @@ PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lumen/run.py \
  exp_name="lumen_imgnet" \
  dataset=imagenet \
  backbone=clip_vit_b32 \
- model=confidnetvlm_attention \
+ model=lumen_attention \
  model.n_iter_freeze_proj=1000 \
  model.use_predicted_caption=true \
  model.use_attention=true \
