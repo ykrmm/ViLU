@@ -1,4 +1,4 @@
-# LuMen: Learning Multi-modal Uncertainty in Vision-Language Models trough Failure Prediction
+# LuMen: Learning Multi-modal Uncertainty in Vision-Language Models for Failure Prediction
 This is the official Pytorch implementation of our ICCV2025 submission *10053*. 
 
 **The code is available for review only, do not share.**
