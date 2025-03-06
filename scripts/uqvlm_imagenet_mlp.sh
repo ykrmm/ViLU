@@ -1,4 +1,4 @@
-PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lscaleuq/run.py \
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lumen/run.py \
  exp_name="uqvlm_mlp_2" \
  dataset=imagenet_emb \
  backbone=clip_vit_b32 \
@@ -21,7 +21,7 @@ PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lscaleuq/run.py \
  wandb_mode=online \
  debug=false \
 
-PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lscaleuq/run.py \
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lumen/run.py \
  exp_name="uqvlm_mlp_3" \
  dataset=imagenet_emb \
  backbone=clip_vit_b32 \
@@ -44,7 +44,7 @@ PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lscaleuq/run.py \
  wandb_mode=online \
  debug=false \
 
-PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lscaleuq/run.py \
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lumen/run.py \
  exp_name="uqvlm_mlp_5" \
  dataset=imagenet_emb \
  backbone=clip_vit_b32 \
@@ -67,7 +67,7 @@ PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lscaleuq/run.py \
  wandb_mode=online \
  debug=false \
 
-PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lscaleuq/run.py \
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lumen/run.py \
  exp_name="uqvlm_mlp_6" \
  dataset=imagenet_emb \
  backbone=clip_vit_b32 \

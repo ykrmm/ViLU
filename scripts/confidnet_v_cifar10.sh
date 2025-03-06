@@ -1,4 +1,4 @@
-PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lscaleuq/run.py \
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lumen/run.py \
  exp_name="confidnet_v" \
  dataset=cifar10 \
  backbone=clip_vit_b32 \

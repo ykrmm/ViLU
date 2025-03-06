@@ -1,4 +1,4 @@
-PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lscaleuq/run.py \
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lumen/run.py \
  exp_name="uqvlm_wbce" \
  dataset=cifar10 \
  backbone=clip_vit_b32 \

@@ -1,4 +1,4 @@
-PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lscaleuq/run.py \
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="1" python lumen/run.py \
  exp_name="confidnet_vonly_imagenet" \
  dataset=imagenet_emb \
  backbone=clip_vit_b32 \

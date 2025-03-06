@@ -8,13 +8,13 @@ with open('requirements.txt') as open_file:
 
 
 setuptools.setup(
-    name='lscaleuq',
+    name='lumen',
     version='1.0.0',
-    url='https://github.com/ykrmm/large_scale_uq',
+    url='Anonymized',
     packages=setuptools.find_packages(),
-    author='Yannis Karmim & Marc Lafon',
-    author_email='lafon.ma.ml@gmail.com',
-    description='Large Scale Uncertainty Pretraining for Vision Language Models',
+    author='Anonymized',
+    author_email='Anonymized',
+    description='LuMen : Learning Multi-modal Uncertainty in Vision-Language Models trough Failure Prediction ',
     long_description=long_description,
     long_description_content_type="text/markdown",
     classifiers=[
@@ -23,5 +23,4 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.9',
-    install_requires=install_requires,
 )

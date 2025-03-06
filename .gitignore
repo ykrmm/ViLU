@@ -134,6 +134,6 @@ multirun/
 *.out 
 lscale_uq/multirun
 *.egg-info/
-lscaleuq.egg-info/
-lscaleuq.egg-info/*
-*lscaleuq.egg-info/*
+lumen.egg-info/
+lumen.egg-info/*
+*lumen.egg-info/*

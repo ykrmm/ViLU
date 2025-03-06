@@ -1,9 +1,0 @@
-_target_: lscaleuq.models.ConfidNetVLMProb
-visual_dim: ${backbone_model.vision_dim}
-textual_dim: ${backbone_model.vision_dim}
-num_classes: 1000
-layers: [512, 512, 512, 1]
-activation: 'leaky_relu'
-negative_slope: 0.01
-use_sigmoid: ${if:${eq:${losses.name},MSE},True,False}
-only_probs: False

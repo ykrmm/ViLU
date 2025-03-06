@@ -1,4 +1,4 @@
-PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lscaleuq/run.py \
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lumen/run.py \
  exp_name="eval_entropy" \
  dataset=laion_emb \
  backbone=clip_vit_b32 \
@@ -25,7 +25,7 @@ PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lscaleuq/run.py \
  wandb_mode=online \
  debug=false
 
-PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lscaleuq/run.py \
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lumen/run.py \
  exp_name="eval_entropy" \
  dataset=cc3m_emb \
  backbone=clip_vit_b32 \
@@ -52,7 +52,7 @@ PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lscaleuq/run.py \
  wandb_mode=online \
  debug=false
 
-PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lscaleuq/run.py \
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lumen/run.py \
  exp_name="eval_entropy" \
  dataset=cc12m_emb \
  backbone=clip_vit_b32 \

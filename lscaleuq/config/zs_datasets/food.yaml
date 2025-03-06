@@ -1,8 +1,0 @@
-root: ${cluster_env.path}
-  
-dst:
-  Food:
-    _target_: lscaleuq.dataset_uq.Food101Dataset
-    root: ${join:${zs_datasets.root},dataset_suite,food-101}
-    split: test
-    transform: ${transform.val}

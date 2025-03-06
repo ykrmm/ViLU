@@ -1,0 +1,5 @@
+_target_: lumen.losses.BCELoss
+weight: 1.0
+weighting_type: static
+reduction: 'mean'
+batchwise_train: ${engine.batchwise_train}

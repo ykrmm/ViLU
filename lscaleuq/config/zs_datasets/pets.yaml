@@ -1,8 +1,0 @@
-root: ${cluster_env.path}
-  
-dst:
-  Pets:
-    _target_: lscaleuq.dataset_uq.OxfordPetsDataset
-    root: ${join:${zs_datasets.root}, dataset_suite, oxford-iiit-pet}
-    split: test
-    transform: ${transform.val}
