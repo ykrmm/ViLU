@@ -11,7 +11,7 @@ from lumen.dataset_uq.oxford_pets import OxfordPetsDataset
 from lumen.dataset_uq.sun397 import SUN397Dataset
 from lumen.dataset_uq.stanford_cars import StanfordCarsDataset
 from lumen.dataset_uq.ucf101 import UCF101Dataset
-
+from lumen.dataset_uq.emb_dts import EmbDataset
 from lumen.dataset_uq.utils import ConvertImageToRGB
 from lumen.dataset_uq.templates import get_templates
 from lumen.dataset_uq.abstract_web_dts import get_webdataset
@@ -22,6 +22,7 @@ __all__ = [
     "CIFAR100Dataset",
     "DTDDataset",
     "EuroSATDataset",
+    "EmbDataset",
     "Caltech101Dataset",
     "FGVCAircraftDataset",
     "Flowers102Dataset",
