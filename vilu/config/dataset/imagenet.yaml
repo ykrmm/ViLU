@@ -1,0 +1,16 @@
+name: ImageNet
+path: data/ImageNet
+web_dataset: false
+caption_dataset: false
+
+train: 
+  _target_: vilu.dataset_uq.ImageNetDataset
+  root: ${dataset.path}
+  split: train
+  transform: ${transform.train}
+
+val:
+  _target_: vilu.dataset_uq.ImageNetDataset
+  root: ${dataset.path}
+  split: val
+  transform: ${transform.val}

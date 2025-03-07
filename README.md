@@ -1,4 +1,4 @@
-# LuMen: Learning Multi-modal Uncertainty in Vision-Language Models for Failure Prediction
+# ViLU: Learning Vision-Language Uncertainties for Failure Prediction
 This is the official Pytorch implementation of our ICCV2025 submission *10053*. 
 
 **The code is available for review only, do not share.**
@@ -9,8 +9,8 @@ This is the official Pytorch implementation of our ICCV2025 submission *10053*.
 
 ## Installation
 ```
-conda create -n lumen python=3.11
-conda activate lumen
+conda create -n vilu python=3.11
+conda activate vilu
 conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
 pip install -e .
 ```
@@ -53,14 +53,14 @@ data/
 ```
 
 ## Training 
-We provide training scripts in the `scripts` folder. For instance, to launch the training of LuMen on CIFAR-10 with the ViT-B/32 backbone with 400 epochs do:
+We provide training scripts in the `scripts` folder. For instance, to launch the training of vilu on CIFAR-10 with the ViT-B/32 backbone with 400 epochs do:
 ```
-sh scripts/train_lumen_cifar10.sh
+sh scripts/train_vilu_cifar10.sh
 ```
 Note that you may adapt the values of `CUDA_VISIBLE_DEVICES`. Training on an RTX A6000 GPU takes around 2 hours.
-The main code for viewing the training loops is located in `lumen/engine/trainer.py`
+The main code for viewing the training loops is located in `vilu/engine/trainer.py`
 
 ## Notebook for reproductibility and visualisations
-In the `notebooks` folder you can find the scripts for loading and evaluating the pre-trained LuMen models on each dataset, as well as the code for visualising the failure curves. 
+In the `notebooks` folder you can find the scripts for loading and evaluating the pre-trained vilu models on each dataset, as well as the code for visualising the failure curves. 
 
 <img src="visu/quali_failure1.png" alt="Description" width="500">

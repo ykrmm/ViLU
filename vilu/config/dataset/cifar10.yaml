@@ -1,0 +1,16 @@
+name: CIFAR10
+path: data/CIFAR-10
+web_dataset: false
+caption_dataset: false
+
+train: 
+  _target_: vilu.dataset_uq.CIFAR10Dataset
+  root: ${dataset.path}
+  train: True
+  transform: ${transform.train}
+
+val:
+  _target_: vilu.dataset_uq.CIFAR10Dataset
+  root: ${dataset.path}
+  train: False
+  transform: ${transform.val}

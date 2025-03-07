@@ -1,0 +1,7 @@
+_target_: vilu.losses.MSELoss
+weight: 1.0
+weighting_type: static
+reduction: 'mean'
+use_entropy: false
+entropy_coef: 0.1
+batchwise_train: ${engine.batchwise_train}

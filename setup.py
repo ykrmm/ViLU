@@ -8,13 +8,13 @@ with open('requirements.txt') as open_file:
 
 
 setuptools.setup(
-    name='lumen',
+    name='vilu',
     version='1.0.0',
     url='Anonymized',
     packages=setuptools.find_packages(),
     author='Anonymized',
     author_email='Anonymized',
-    description='LuMen : Learning Multi-modal Uncertainty in Vision-Language Models trough Failure Prediction ',
+    description='ViLU: Learning Vision-Language Uncertainties for Failure Prediction',
     long_description=long_description,
     long_description_content_type="text/markdown",
     classifiers=[

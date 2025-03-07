@@ -1,0 +1,6 @@
+_target_: vilu.lib.LightningFabric
+accelerator: gpu
+precision: bf16-mixed
+strategy:
+  _target_: lightning.fabric.strategies.DDPStrategy
+  find_unused_parameters: false

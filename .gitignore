@@ -132,10 +132,10 @@ outputs/
 wandb/
 multirun/
 *.out 
-lumen/multirun
+vilu/multirun
 *.egg-info/
-lumen.egg-info/
-lumen.egg-info/*
-*lumen.egg-info/*
+vilu.egg-info/
+vilu.egg-info/*
+*vilu.egg-info/*
 
 data/

@@ -1,8 +1,8 @@
-PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python lumen/run.py \
- exp_name="lumen_cifar10" \
+PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python vilu/run.py \
+ exp_name="vilu_cifar10" \
  dataset=cifar10 \
  backbone=clip_vit_b32 \
- model=lumen_attention \
+ model=vilu_attention \
  model.keep_frozen=false \
  model.n_iter_freeze_proj=1000 \
  model.use_predicted_caption=true \
