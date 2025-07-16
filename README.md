@@ -1,6 +1,5 @@
 # ViLU: Learning Vision-Language Uncertainties for Failure Prediction
-This is the official Pytorch implementation of our ICCV2025.
-
+This is the official Pytorch implementation of [ViLU](https://arxiv.org/abs/2507.07620) accepted at ICCV2025.
 
 <img src="visu/figure_model.png" alt="Description" width="800">
 
