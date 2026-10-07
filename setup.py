@@ -10,10 +10,9 @@ with open('requirements.txt') as open_file:
 setuptools.setup(
     name='vilu',
     version='1.0.0',
-    url='Anonymized',
+    url='https://github.com/ykrmm/ViLU',
     packages=setuptools.find_packages(),
-    author='Anonymized',
-    author_email='Anonymized',
+    author='Marc Lafon, Yannis Karmim',
     description='ViLU: Learning Vision-Language Uncertainties for Failure Prediction',
     long_description=long_description,
     long_description_content_type="text/markdown",

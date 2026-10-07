@@ -13,4 +13,4 @@ PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python vilu/run.py \
  loss.weighting_type='adaptative' \
  optimizer.lr=0.001 \
  batch_size=512 \
- debug=false \
+ debug=false

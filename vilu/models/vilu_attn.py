@@ -4,12 +4,12 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch import Tensor
 
-from vilu.models import Abstractvilu
+from vilu.models.abstract_vilu import AbstractViLU
 
 Kwargs = Dict[str, Any]
 
 
-class viluAttention(Abstractvilu):
+class ViLUAttention(AbstractViLU):
     def __init__(
         self,
         concat: bool = False,

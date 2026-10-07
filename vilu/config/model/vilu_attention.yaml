@@ -1,4 +1,4 @@
-_target_: vilu.models.viluAttention
+_target_: vilu.models.ViLUAttention
 visual_dim: ${backbone.vision_dim}
 textual_dim: ${backbone.vision_dim}
 layers: [512, 256, 128, 1]

@@ -231,7 +231,7 @@ class Trainer:
             with self.fabric.autocast():
                 entropy = - (-torch.sum(probs * torch.log(probs + 1e-6), dim=-1))  # less entropy, more uncertain
                 entropy /= torch.log(torch.tensor(probs.size(-1)) + 1e-6)
-                doctor_uq = torch.sum(torch.tensor(probs)**2, dim=-1)
+                doctor_uq = torch.sum(probs**2, dim=-1)
                 doctor_uq = - (1-doctor_uq)/doctor_uq
             confidence_success.append(confid_scores[~missclassified])
             confidence_failure.append(confid_scores[missclassified])

@@ -6,7 +6,7 @@ import hashlib
 import os
 import urllib
 import warnings
-from pkg_resources import packaging
+from packaging import version as _version
 
 import torch
 from PIL import Image
@@ -24,7 +24,7 @@ except ImportError:
     BICUBIC = Image.BICUBIC
 
 
-if packaging.version.parse(torch.__version__) < packaging.version.parse("1.7.1"):
+if _version.parse(torch.__version__) < _version.parse("1.7.1"):
     warnings.warn("PyTorch version 1.7.1 or higher is recommended")
 
 
@@ -282,7 +282,7 @@ def tokenize(
     sot_token = _tokenizer.encoder["<|startoftext|>"]
     eot_token = _tokenizer.encoder["<|endoftext|>"]
     all_tokens = [[sot_token] + _tokenizer.encode(text) + [eot_token] for text in texts]
-    if packaging.version.parse(torch.__version__) < packaging.version.parse("1.8.0"):
+    if _version.parse(torch.__version__) < _version.parse("1.8.0"):
         result = torch.zeros(len(all_tokens), context_length, dtype=torch.long)
     else:
         result = torch.zeros(len(all_tokens), context_length, dtype=torch.int)

@@ -3,7 +3,7 @@ import torch.nn as nn
 from torch import Tensor
 
 
-class Abstractvilu(nn.Module):
+class AbstractViLU(nn.Module):
     def __init__(
         self,
         visual_dim: int = 512,
