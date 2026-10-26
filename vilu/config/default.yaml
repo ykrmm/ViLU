@@ -45,7 +45,7 @@ defaults:
 
     - backbone: clip_vit_b32
     
-    - model: confidnetvlm_attention
+    - model: vilu_attention
 
     - optimizer: sgd
 

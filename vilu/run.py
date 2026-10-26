@@ -12,7 +12,7 @@ from torch.utils.data import Dataset, DataLoader
 from vilu.engine import Trainer
 from vilu.lib.setup_experiment import setup_experiment
 from vilu.models.clip import load as load_clip
-from vilu.models import Abstractvilu
+from vilu.models import AbstractViLU
 
 
 @hydra.main(config_path="config", config_name="default", version_base="1.3")
@@ -46,7 +46,7 @@ def main(config: DictConfig) -> None:
         clip_model, _ = load_clip(config.backbone.name)
 
     # Model & Optimizer
-    model: Abstractvilu = instantiate(config.model, logit_scale=clip_model.logit_scale.exp().item())
+    model: AbstractViLU = instantiate(config.model, logit_scale=clip_model.logit_scale.exp().item())
     optimizer: Optimizer = instantiate(config.optimizer, params=model.parameters())
 
     # Distrubuted Training with Fabric
