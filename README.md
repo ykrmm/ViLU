@@ -69,6 +69,24 @@ with an MSE loss) for each dataset, all for CLIP ViT-B/32:
 | SUN397 | `weights/vilu_sun.ckpt` | `weights/lvu_sun.ckpt` |
 | StanfordCars | `weights/vilu_cars.ckpt` | `weights/lvu_cars.ckpt` |
 | UCF101 | `weights/vilu_ucf.ckpt` | `weights/lvu_ucf.ckpt` |
+| ImageNet-1k | `weights/vilu_imagenet.ckpt` | `weights/lvu_imagenet.ckpt` |
+
+The ImageNet-1k checkpoints were retrained in 2026, as the original files had not been released.
+ViLU uses `scripts/train_vilu_imagenet.sh` (SGD, lr 1e-3, 300 epochs) and LVU
+`scripts/train_lvu_imagenet.sh` (lr 1e-2). On ImageNet-1k val they reach:
+
+| | AUC ↑ | FPR95 ↓ |
+|---|---|---|
+| ViLU, paper (Table 1) | 89.5 | 47.4 |
+| ViLU, `weights/vilu_imagenet.ckpt` | 90.8 | 43.1 |
+| LVU, paper (Table 1) | 78.7 | 77.0 |
+| LVU, `weights/lvu_imagenet.ckpt` | 75.5 | 79.3 |
+
+`scripts/eval_imagenet.py` recomputes these numbers:
+
+```bash
+python scripts/eval_imagenet.py --ckpt weights/vilu_imagenet.ckpt --model vilu --data-root data/ImageNet
+```
 
 A checkpoint loads into `ViLUAttention`:
 

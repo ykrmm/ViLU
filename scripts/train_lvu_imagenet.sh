@@ -13,6 +13,6 @@ PYTHONWARNINGS="ignore" CUDA_VISIBLE_DEVICES="0" python vilu/run.py \
  resume=False \
  loss=mse \
  loss.weighting_type='adaptative' \
- optimizer.lr=0.001 \
+ optimizer.lr=0.01 \
  batch_size=512 \
  debug=false
