@@ -63,13 +63,27 @@ with an MSE loss) for each dataset, all for CLIP ViT-B/32:
 | Flowers102 | `weights/vilu_flowers.ckpt` | `weights/lvu_flowers.ckpt` |
 | OxfordPets | `weights/vilu_pets.ckpt` | `weights/lvu_pets.ckpt` |
 | Food101 | `weights/vilu_food.ckpt` | `weights/lvu_food.ckpt` |
-| FGVCAircraft | `weights/vilu_aircraft.ckpt` | `weights/lvu_aircraft.ckpt` |
+| FGVCAircraft | `weights/vilu_aircraft.ckpt` (see below) | `weights/lvu_aircraft.ckpt` |
 | EuroSAT | `weights/vilu_eurosat.ckpt` | `weights/lvu_eurosat.ckpt` |
 | DTD | `weights/vilu_dtd.ckpt` | `weights/lvu_dtd.ckpt` |
 | SUN397 | `weights/vilu_sun.ckpt` | `weights/lvu_sun.ckpt` |
 | StanfordCars | `weights/vilu_cars.ckpt` | `weights/lvu_cars.ckpt` |
 | UCF101 | `weights/vilu_ucf.ckpt` | `weights/lvu_ucf.ckpt` |
 | ImageNet-1k | `weights/vilu_imagenet.ckpt` | `weights/lvu_imagenet.ckpt` |
+
+The FGVCAircraft ViLU checkpoint was replaced in 2026: the original file scored well below the paper.
+Two retrained models are provided. `weights/vilu_aircraft.ckpt` is trained with SGD like the other
+datasets (lr 1e-1 instead of 1e-2, 300 epochs) and matches the paper; `weights/vilu_aircraft_adamw.ckpt`
+is trained with AdamW (lr 1e-3 head / 1e-4 projections, 300 epochs) and is better. Both use
+`keep_frozen=false`, batch 128 and a checkpoint picked on the validation split. On the FGVCAircraft
+test split (prompt "a photo of a {}."):
+
+| | AUC ↑ | FPR95 ↓ |
+|---|---|---|
+| ViLU, original checkpoint | 71.5 | 86.8 |
+| ViLU, `weights/vilu_aircraft.ckpt` (SGD) | 81.0 | 70.4 |
+| ViLU, `weights/vilu_aircraft_adamw.ckpt` (AdamW) | 83.6 | 69.1 |
+| LVU, `weights/lvu_aircraft.ckpt` | 75.4 | 83.3 |
 
 The ImageNet-1k checkpoints were retrained in 2026, as the original files had not been released.
 ViLU uses `scripts/train_vilu_imagenet.sh` (SGD, lr 1e-3, 300 epochs) and LVU
